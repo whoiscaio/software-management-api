@@ -12,6 +12,8 @@ import * as bcrypt from 'bcrypt';
 import { SignupDTO } from '../dtos/signup.dto';
 import { AuthService } from '../services/auth.service';
 import { LoginDTO } from '../dtos/login.dto';
+import { plainToClass } from 'class-transformer';
+import { User } from '../models/user.model';
 
 @Controller('auth')
 @UsePipes(ValidationPipe)
@@ -34,9 +36,7 @@ export class AuthController {
       throw new UnauthorizedException('Credenciais inválidas');
     }
 
-    const payload = { username: user.username };
-
-    return payload;
+    return plainToClass(User, user);
   }
 
   @Post('signup')
@@ -53,6 +53,6 @@ export class AuthController {
 
     const newUser = this.authService.createUser(username, hashedPassword);
 
-    return newUser;
+    return plainToClass(User, newUser);
   }
 }
