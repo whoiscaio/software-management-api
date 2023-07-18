@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   NotFoundException,
   Param,
@@ -57,5 +58,18 @@ export class TeamController {
     const updatedTeam = await this.teamService.update(id, teamDTO);
 
     return updatedTeam;
+  }
+
+  @Delete(':id')
+  async delete(@Param('id', ParseUUIDPipe) id: string) {
+    const team = await this.teamService.getOne(id);
+
+    if (!team) {
+      throw new NotFoundException('Team not found');
+    }
+
+    await this.teamService.delete(id);
+
+    return;
   }
 }

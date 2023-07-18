@@ -41,4 +41,8 @@ export class TeamService {
 
     return updatedTeam;
   }
+
+  async delete(id: string) {
+    await this.teamRepository.delete(id);
+  }
 }
