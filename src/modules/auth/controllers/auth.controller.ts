@@ -13,13 +13,17 @@ import * as bcrypt from 'bcrypt';
 import { SignupDTO } from '../dtos/signup.dto';
 import { AuthService } from '../services/auth.service';
 import { LoginDTO } from '../dtos/login.dto';
+import { JwtService } from 'src/shared/services/jwt.service';
 import { plainToClass } from 'class-transformer';
 import { User } from '../models/user.model';
 
 @Controller('auth')
 @UsePipes(ValidationPipe)
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  constructor(
+    private readonly authService: AuthService,
+    private readonly jwtService: JwtService,
+  ) {}
 
   @Post('login')
   @HttpCode(200)
@@ -38,7 +42,9 @@ export class AuthController {
       throw new UnauthorizedException('Credenciais inválidas');
     }
 
-    return plainToClass(User, user);
+    const jwt = this.jwtService.sign({ user: plainToClass(User, user) });
+
+    return { token: jwt };
   }
 
   @Post('signup')
