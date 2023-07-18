@@ -2,6 +2,7 @@ import {
   BadRequestException,
   Body,
   Controller,
+  HttpCode,
   Post,
   UnauthorizedException,
   UsePipes,
@@ -21,6 +22,7 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Post('login')
+  @HttpCode(200)
   async login(@Body() loginDTO: LoginDTO) {
     const { username, password } = loginDTO;
 
@@ -51,8 +53,8 @@ export class AuthController {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const newUser = this.authService.createUser(username, hashedPassword);
+    await this.authService.createUser(username, hashedPassword);
 
-    return plainToClass(User, newUser);
+    return;
   }
 }
