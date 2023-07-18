@@ -1,4 +1,4 @@
-import { Team } from 'src/team/models/team.model';
+import { Team } from 'src/modules/team/models/team.model';
 import {
   Column,
   Entity,

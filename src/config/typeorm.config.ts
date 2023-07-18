@@ -7,7 +7,7 @@ const TypeOrmModuleConfig: TypeOrmModuleOptions = {
   username: 'root',
   password: 'root',
   database: 'db_sw_process_management',
-  entities: ['dist/**/models/*.model.js'],
+  entities: ['dist/modules/**/models/*.model.js'],
   synchronize: true,
 };
 
