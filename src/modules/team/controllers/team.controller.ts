@@ -25,6 +25,17 @@ export class TeamController {
     return teams;
   }
 
+  @Get(':id')
+  async findOne(@Param('id', ParseUUIDPipe) id: string) {
+    const team = await this.teamService.getOne(id);
+
+    if (!team) {
+      throw new NotFoundException('Team not found');
+    }
+
+    return team;
+  }
+
   @Post()
   async create(@Body() teamDTO: TeamDTO) {
     await this.teamService.create(teamDTO);
