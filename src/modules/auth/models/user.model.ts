@@ -8,7 +8,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
-@Entity()
+@Entity('tb_user')
 export class User {
   @PrimaryGeneratedColumn('uuid')
   id: string;
@@ -20,15 +20,15 @@ export class User {
   @Exclude()
   password: string;
 
-  @ManyToMany(() => Team)
+  @ManyToMany(() => Team, (team) => team.users)
   @JoinTable({
     name: 'user_team',
     joinColumn: {
-      name: 'team',
+      name: 'user_id',
       referencedColumnName: 'id',
     },
     inverseJoinColumn: {
-      name: 'user',
+      name: 'team_id',
       referencedColumnName: 'id',
     },
   })

@@ -10,8 +10,13 @@ export class AuthService {
     private readonly userRepository: Repository<User>,
   ) {}
 
-  async findByUsername(username: string) {
-    const user = await this.userRepository.findOne({ where: { username } });
+  private relations = ['teams'];
+
+  async findByUsername(username: string, eager?: boolean) {
+    const user = await this.userRepository.findOne({
+      where: { username },
+      relations: eager ? this.relations : [],
+    });
 
     return user;
   }

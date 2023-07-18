@@ -1,7 +1,13 @@
 import { User } from 'src/modules/auth/models/user.model';
-import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
-@Entity()
+@Entity('tb_team')
 export class Team {
   @PrimaryGeneratedColumn('uuid')
   id: string;
@@ -9,6 +15,17 @@ export class Team {
   @Column()
   name: string;
 
-  @ManyToMany(() => User)
+  @ManyToMany(() => User, (user) => user.teams)
+  @JoinTable({
+    name: 'user_team',
+    joinColumn: {
+      name: 'team_id',
+      referencedColumnName: 'id',
+    },
+    inverseJoinColumn: {
+      name: 'user_id',
+      referencedColumnName: 'id',
+    },
+  })
   users: User[];
 }

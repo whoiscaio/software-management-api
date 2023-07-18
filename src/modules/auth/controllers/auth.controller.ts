@@ -30,7 +30,7 @@ export class AuthController {
   async login(@Body() loginDTO: LoginDTO) {
     const { username, password } = loginDTO;
 
-    const user = await this.authService.findByUsername(username);
+    const user = await this.authService.findByUsername(username, true);
 
     if (!user) {
       throw new UnauthorizedException('Credenciais inválidas');

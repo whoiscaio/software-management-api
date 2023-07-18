@@ -11,14 +11,19 @@ export class TeamService {
     private readonly teamRepository: Repository<Team>,
   ) {}
 
+  private relations = ['users'];
+
   async getAll() {
     const teams = await this.teamRepository.find();
 
     return teams;
   }
 
-  async getOne(id: string) {
-    const team = await this.teamRepository.findOne({ where: { id } });
+  async getOne(id: string, eager?: boolean) {
+    const team = await this.teamRepository.findOne({
+      where: { id },
+      relations: eager ? this.relations : [],
+    });
 
     return team || null;
   }
