@@ -8,13 +8,16 @@ import {
   ParseUUIDPipe,
   Post,
   Put,
+  UseGuards,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
 import { TeamService } from '../services/team.service';
 import { TeamDTO } from '../dtos/team.dto';
+import { JwtAuthGuard } from 'src/shared/guards/jwt.guard';
 
 @Controller('teams')
+@UseGuards(JwtAuthGuard)
 @UsePipes(ValidationPipe)
 export class TeamController {
   constructor(private readonly teamService: TeamService) {}

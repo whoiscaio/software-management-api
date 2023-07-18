@@ -19,7 +19,9 @@ export class JwtService {
 
   verify(jwt: string) {
     try {
-      return this.jwtService.verify(jwt);
+      this.jwtService.verify(jwt);
+
+      return true;
     } catch (error) {
       throw new UnauthorizedException('Token inválido ou expirado');
     }
