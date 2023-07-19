@@ -3,7 +3,6 @@ import { Workspace } from 'src/modules/workspace/models/workspace.model';
 import {
   Column,
   Entity,
-  JoinTable,
   ManyToMany,
   OneToMany,
   PrimaryGeneratedColumn,
