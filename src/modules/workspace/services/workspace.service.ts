@@ -57,7 +57,7 @@ export class WorkspaceService {
   async update(id: string, workspace: WorkspaceDTO) {
     const existingworkspace = await this.getOne(id);
 
-    const updatedWorkspaceModel = this.workspaceRepository.create({
+    const updatedWorkspaceModel = await this.toEntity({
       ...existingworkspace,
       ...workspace,
     });
