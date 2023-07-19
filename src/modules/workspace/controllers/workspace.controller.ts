@@ -15,7 +15,6 @@ import {
 import { JwtAuthGuard } from 'src/shared/guards/jwt.guard';
 import { WorkspaceService } from '../services/workspace.service';
 import { WorkspaceDTO } from '../dtos/workspace.dto';
-import { TeamService } from 'src/modules/team/services/team.service';
 
 @Controller('workspaces')
 @UseGuards(JwtAuthGuard)
