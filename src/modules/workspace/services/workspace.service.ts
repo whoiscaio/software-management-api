@@ -55,18 +55,18 @@ export class WorkspaceService {
   }
 
   async update(id: string, workspace: WorkspaceDTO) {
-    const existingworkspace = await this.getOne(id);
+    const existingWorkspace = await this.getOne(id);
 
     const updatedWorkspaceModel = await this.toEntity({
-      ...existingworkspace,
+      ...existingWorkspace,
       ...workspace,
     });
 
-    const updatedworkspace = await this.workspaceRepository.save(
+    const updatedWorkspace = await this.workspaceRepository.save(
       updatedWorkspaceModel,
     );
 
-    return updatedworkspace;
+    return updatedWorkspace;
   }
 
   async delete(id: string) {

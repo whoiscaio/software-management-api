@@ -52,18 +52,18 @@ export class WorkspaceController {
     @Param('id', ParseUUIDPipe) id: string,
     @Body() workspaceDTO: WorkspaceDTO,
   ) {
-    const existingworkspace = await this.workspaceService.getOne(id);
+    const existingWorkspace = await this.workspaceService.getOne(id);
 
-    if (!existingworkspace) {
+    if (!existingWorkspace) {
       throw new NotFoundException('Workspace not found');
     }
 
-    const updatedworkspace = await this.workspaceService.update(
+    const updatedWorkspace = await this.workspaceService.update(
       id,
       workspaceDTO,
     );
 
-    return updatedworkspace;
+    return updatedWorkspace;
   }
 
   @Delete(':id')
