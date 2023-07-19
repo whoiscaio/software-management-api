@@ -58,6 +58,16 @@ export class TeamController {
     return;
   }
 
+  @Post(':teamId/users/:userId')
+  async assignUserToTeam(
+    @Param('teamId') teamId: string,
+    @Param('userId') userId: string,
+  ) {
+    await this.teamService.assignUserToTeam(teamId, userId);
+
+    return;
+  }
+
   @Put(':id')
   async update(
     @Param('id', ParseUUIDPipe) id: string,

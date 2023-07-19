@@ -1,14 +1,17 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Team } from '../models/team.model';
 import { TeamDTO } from '../dtos/team.dto';
+import { User } from 'src/modules/auth/models/user.model';
 
 @Injectable()
 export class TeamService {
   constructor(
     @InjectRepository(Team)
     private readonly teamRepository: Repository<Team>,
+    @InjectRepository(User)
+    private readonly userRepository: Repository<User>,
   ) {}
 
   private relations = ['users'];
@@ -32,6 +35,24 @@ export class TeamService {
     const newTeam = this.teamRepository.create(team);
 
     await this.teamRepository.save(newTeam);
+  }
+
+  async assignUserToTeam(teamId: string, userId: string) {
+    const team = await this.teamRepository.findOne({ where: { id: teamId } });
+
+    if (!team) {
+      throw new NotFoundException('Time não encontrado ou não existe');
+    }
+
+    const user = await this.userRepository.findOne({ where: { id: userId } });
+
+    if (!user) {
+      throw new NotFoundException('Usuário não encontrado ou não existe');
+    }
+
+    team.users = [...team.users, user];
+
+    await this.teamRepository.save(team);
   }
 
   async update(id: string, team: TeamDTO) {
