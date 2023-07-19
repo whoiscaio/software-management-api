@@ -22,7 +22,7 @@ export class PhaseService {
     });
 
     if (!phaseWorkspace) {
-      throw new NotFoundException('A fase não existe');
+      throw new NotFoundException('A área de trabalho não existe');
     }
 
     const phase = this.phaseRepository.create({

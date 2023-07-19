@@ -5,6 +5,7 @@ import TypeOrmModuleConfig from './config/typeorm.config';
 import { TeamModule } from './modules/team/team.module';
 import { WorkspaceModule } from './modules/workspace/workspace.module';
 import { PhaseModule } from './modules/phase/phase.module';
+import { ProcessModule } from './modules/process/process.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { PhaseModule } from './modules/phase/phase.module';
     TeamModule,
     WorkspaceModule,
     PhaseModule,
+    ProcessModule,
   ],
 })
 export class AppModule {}
