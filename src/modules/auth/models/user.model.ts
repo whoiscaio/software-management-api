@@ -20,7 +20,9 @@ export class User {
   @Exclude()
   password: string;
 
-  @ManyToMany(() => Team, (team) => team.users)
+  @ManyToMany(() => Team, (team) => team.users, {
+    cascade: ['update', 'insert'],
+  })
   @JoinTable({
     name: 'user_team',
     joinColumn: {

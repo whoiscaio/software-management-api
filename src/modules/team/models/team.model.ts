@@ -18,17 +18,6 @@ export class Team {
   name: string;
 
   @ManyToMany(() => User, (user) => user.teams)
-  @JoinTable({
-    name: 'user_team',
-    joinColumn: {
-      name: 'team_id',
-      referencedColumnName: 'id',
-    },
-    inverseJoinColumn: {
-      name: 'user_id',
-      referencedColumnName: 'id',
-    },
-  })
   users: User[];
 
   @OneToMany(() => Workspace, (workspace) => workspace.team)

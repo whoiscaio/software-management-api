@@ -38,19 +38,21 @@ export class TeamService {
   }
 
   async assignUserToTeam(teamId: string, userId: string) {
-    const team = await this.teamRepository.findOne({ where: { id: teamId } });
-
-    if (!team) {
-      throw new NotFoundException('Time não encontrado ou não existe');
-    }
-
     const user = await this.userRepository.findOne({ where: { id: userId } });
 
     if (!user) {
       throw new NotFoundException('Usuário não encontrado ou não existe');
     }
 
+    const team = await this.getOne(teamId, true);
+
+    if (!team) {
+      throw new NotFoundException('Time não encontrado ou não existe');
+    }
+
     team.users = [...team.users, user];
+
+    console.log(team);
 
     await this.teamRepository.save(team);
   }
