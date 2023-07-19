@@ -34,7 +34,7 @@ export class ProcessController {
     const process = await this.processService.getOne(id, true);
 
     if (!process) {
-      throw new NotFoundException('Fase não encontrada.');
+      throw new NotFoundException('Processo não encontrado ou não existe.');
     }
 
     return process;

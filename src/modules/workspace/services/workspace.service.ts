@@ -17,17 +17,17 @@ export class WorkspaceService {
   private relations = ['phases', 'team'];
 
   async toEntity(workspaceDTO: WorkspaceDTO) {
-    const workspaceTeam = await this.teamRepository.findOne({
+    const team = await this.teamRepository.findOne({
       where: { id: workspaceDTO.team_id },
     });
 
-    if (!workspaceTeam) {
+    if (!team) {
       throw new NotFoundException('O time não existe');
     }
 
     const workspace = this.workspaceRepository.create({
       ...workspaceDTO,
-      team: workspaceTeam,
+      team,
     });
 
     return workspace;

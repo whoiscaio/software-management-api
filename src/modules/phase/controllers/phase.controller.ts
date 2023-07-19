@@ -34,7 +34,7 @@ export class PhaseController {
     const phase = await this.phaseService.getOne(id, true);
 
     if (!phase) {
-      throw new NotFoundException('Fase não encontrada');
+      throw new NotFoundException('Fase não encontrada ou não existe.');
     }
 
     return phase;
@@ -55,7 +55,7 @@ export class PhaseController {
     const existingPhase = await this.phaseService.getOne(id);
 
     if (!existingPhase) {
-      throw new NotFoundException('phase not found');
+      throw new NotFoundException('Fase não encontrada ou não existe.');
     }
 
     const updatedPhase = await this.phaseService.update(id, phaseDTO);
@@ -68,7 +68,7 @@ export class PhaseController {
     const phase = await this.phaseService.getOne(id);
 
     if (!phase) {
-      throw new NotFoundException('phase not found');
+      throw new NotFoundException('Fase não encontrada ou não existe.');
     }
 
     await this.phaseService.delete(id);

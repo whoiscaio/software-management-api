@@ -6,6 +6,7 @@ import { TeamModule } from './modules/team/team.module';
 import { WorkspaceModule } from './modules/workspace/workspace.module';
 import { PhaseModule } from './modules/phase/phase.module';
 import { ProcessModule } from './modules/process/process.module';
+import { SubprocessModule } from './modules/subprocess/subprocess.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { ProcessModule } from './modules/process/process.module';
     WorkspaceModule,
     PhaseModule,
     ProcessModule,
+    SubprocessModule,
   ],
 })
 export class AppModule {}

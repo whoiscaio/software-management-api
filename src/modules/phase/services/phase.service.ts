@@ -17,17 +17,19 @@ export class PhaseService {
   private relations = ['processes', 'workspace'];
 
   async toEntity(phaseDTO: PhaseDTO) {
-    const phaseWorkspace = await this.workspaceRepository.findOne({
+    const workspace = await this.workspaceRepository.findOne({
       where: { id: phaseDTO.workspace_id },
     });
 
-    if (!phaseWorkspace) {
-      throw new NotFoundException('A área de trabalho não existe');
+    if (!workspace) {
+      throw new NotFoundException(
+        'A área de trabalho não foi encontrada ou não existe.',
+      );
     }
 
     const phase = this.phaseRepository.create({
       ...phaseDTO,
-      workspace: phaseWorkspace,
+      workspace,
     });
 
     return phase;

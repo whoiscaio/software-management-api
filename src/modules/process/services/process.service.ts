@@ -17,17 +17,17 @@ export class ProcessService {
   private relations = ['subprocesses', 'phase'];
 
   async toEntity(processDTO: ProcessDTO) {
-    const processPhase = await this.phaseRepository.findOne({
+    const phase = await this.phaseRepository.findOne({
       where: { id: processDTO.phase_id },
     });
 
-    if (!processPhase) {
-      throw new NotFoundException('A fase não existe');
+    if (!phase) {
+      throw new NotFoundException('Fase não encontrada ou não existe.');
     }
 
     const process = this.processRepository.create({
       ...processDTO,
-      phase: processPhase,
+      phase,
     });
 
     return process;

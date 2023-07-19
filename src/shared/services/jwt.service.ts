@@ -23,7 +23,7 @@ export class JwtService {
 
       return true;
     } catch (error) {
-      throw new UnauthorizedException('Token inválido ou expirado');
+      throw new UnauthorizedException('Token inválido ou expirado.');
     }
   }
 }

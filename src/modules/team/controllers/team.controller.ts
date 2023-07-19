@@ -34,7 +34,7 @@ export class TeamController {
     const team = await this.teamService.getOne(id);
 
     if (!team) {
-      throw new NotFoundException('Team not found');
+      throw new NotFoundException('Time não encontrado ou não existe.');
     }
 
     return team;
@@ -45,7 +45,7 @@ export class TeamController {
     const team = await this.teamService.getOne(id, true);
 
     if (!team) {
-      throw new NotFoundException('Team not found');
+      throw new NotFoundException('Time não encontrado ou não existe.');
     }
 
     return team.users;
@@ -66,7 +66,7 @@ export class TeamController {
     const existingTeam = await this.teamService.getOne(id);
 
     if (!existingTeam) {
-      throw new NotFoundException('Team not found');
+      throw new NotFoundException('Time não encontrado ou não existe.');
     }
 
     const updatedTeam = await this.teamService.update(id, teamDTO);
@@ -79,7 +79,7 @@ export class TeamController {
     const team = await this.teamService.getOne(id);
 
     if (!team) {
-      throw new NotFoundException('Team not found');
+      throw new NotFoundException('Time não encontrado ou não existe.');
     }
 
     await this.teamService.delete(id);

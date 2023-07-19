@@ -33,13 +33,13 @@ export class AuthController {
     const user = await this.authService.findByUsername(username, true);
 
     if (!user) {
-      throw new UnauthorizedException('Credenciais inválidas');
+      throw new UnauthorizedException('Credenciais inválidas.');
     }
 
     const passwordMatch = await bcrypt.compare(password, user.password);
 
     if (!passwordMatch) {
-      throw new UnauthorizedException('Credenciais inválidas');
+      throw new UnauthorizedException('Credenciais inválidas.');
     }
 
     const jwt = this.jwtService.sign({ user: plainToClass(User, user) });
@@ -54,7 +54,7 @@ export class AuthController {
     const isUsernameTaken = !!(await this.authService.findByUsername(username));
 
     if (isUsernameTaken) {
-      throw new BadRequestException('Nome de usuário já existe');
+      throw new BadRequestException('Nome de usuário já existe.');
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);

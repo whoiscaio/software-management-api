@@ -16,7 +16,7 @@ export class JwtAuthGuard implements CanActivate {
     const token = request.headers.authorization?.replace('Bearer ', '');
 
     if (!token) {
-      throw new UnauthorizedException('Nenhum token foi enviado');
+      throw new UnauthorizedException('Nenhum token foi enviado.');
     }
 
     return this.jwtService.verify(token);

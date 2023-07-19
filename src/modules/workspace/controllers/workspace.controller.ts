@@ -34,7 +34,9 @@ export class WorkspaceController {
     const workspace = await this.workspaceService.getOne(id, true);
 
     if (!workspace) {
-      throw new NotFoundException('workspace not found');
+      throw new NotFoundException(
+        'Área de trabalho não encontrada ou não existe.',
+      );
     }
 
     return workspace;
@@ -55,7 +57,9 @@ export class WorkspaceController {
     const existingWorkspace = await this.workspaceService.getOne(id);
 
     if (!existingWorkspace) {
-      throw new NotFoundException('Workspace not found');
+      throw new NotFoundException(
+        'Área de trabalho não encontrada ou não existe.',
+      );
     }
 
     const updatedWorkspace = await this.workspaceService.update(
@@ -71,7 +75,9 @@ export class WorkspaceController {
     const workspace = await this.workspaceService.getOne(id);
 
     if (!workspace) {
-      throw new NotFoundException('Workspace not found');
+      throw new NotFoundException(
+        'Área de trabalho não encontrada ou não existe.',
+      );
     }
 
     await this.workspaceService.delete(id);
