@@ -47,6 +47,16 @@ export class ProcessController {
     return;
   }
 
+  @Post(':processId/users/:userId')
+  async assignUserToProcess(
+    @Param('processId', ParseUUIDPipe) processId: string,
+    @Param('userId', ParseUUIDPipe) userId: string,
+  ) {
+    await this.processService.assignUserToProcess(processId, userId);
+
+    return;
+  }
+
   @Put(':id')
   async update(
     @Param('id', ParseUUIDPipe) id: string,
