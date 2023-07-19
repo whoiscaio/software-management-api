@@ -1,9 +1,11 @@
 import { User } from 'src/modules/auth/models/user.model';
+import { Workspace } from 'src/modules/workspace/models/workspace.model';
 import {
   Column,
   Entity,
   JoinTable,
   ManyToMany,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
@@ -28,4 +30,7 @@ export class Team {
     },
   })
   users: User[];
+
+  @OneToMany(() => Workspace, (workspace) => workspace.team)
+  workspaces: Workspace[];
 }
