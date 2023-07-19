@@ -31,24 +31,13 @@ export class TeamController {
 
   @Get(':id')
   async findOne(@Param('id', ParseUUIDPipe) id: string) {
-    const team = await this.teamService.getOne(id);
-
-    if (!team) {
-      throw new NotFoundException('Time não encontrado ou não existe.');
-    }
-
-    return team;
-  }
-
-  @Get(':id/users')
-  async findUsers(@Param('id', ParseUUIDPipe) id: string) {
     const team = await this.teamService.getOne(id, true);
 
     if (!team) {
       throw new NotFoundException('Time não encontrado ou não existe.');
     }
 
-    return team.users;
+    return team;
   }
 
   @Post()
