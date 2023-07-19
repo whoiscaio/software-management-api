@@ -17,10 +17,12 @@ export class Process {
   @Column()
   name: string;
 
-  @ManyToOne(() => Phase, (phase) => phase.processes)
+  @ManyToOne(() => Phase, (phase) => phase.processes, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'phase_id', referencedColumnName: 'id' })
   phase: Phase;
 
-  @OneToMany(() => Subprocess, (subprocess) => subprocess.process)
+  @OneToMany(() => Subprocess, (subprocess) => subprocess.process, {
+    cascade: true,
+  })
   subprocesses: Subprocess[];
 }

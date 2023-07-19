@@ -19,6 +19,6 @@ export class Team {
   @ManyToMany(() => User, (user) => user.teams)
   users: User[];
 
-  @OneToMany(() => Workspace, (workspace) => workspace.team)
+  @OneToMany(() => Workspace, (workspace) => workspace.team, { cascade: true })
   workspaces: Workspace[];
 }

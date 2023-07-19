@@ -20,10 +20,12 @@ export class Phase {
   @Column()
   description: string;
 
-  @ManyToOne(() => Workspace, (workspace) => workspace.phases)
+  @ManyToOne(() => Workspace, (workspace) => workspace.phases, {
+    onDelete: 'CASCADE',
+  })
   @JoinColumn({ name: 'workspace_id', referencedColumnName: 'id' })
   workspace: Workspace;
 
-  @OneToMany(() => Process, (process) => process.phase)
+  @OneToMany(() => Process, (process) => process.phase, { cascade: true })
   processes: Process[];
 }

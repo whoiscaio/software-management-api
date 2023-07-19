@@ -23,7 +23,7 @@ export class Workspace {
   @OneToMany(() => Phase, (phase) => phase.workspace)
   phases: Phase[];
 
-  @ManyToOne(() => Team, (team) => team.workspaces)
+  @ManyToOne(() => Team, (team) => team.workspaces, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'team_id', referencedColumnName: 'id' })
   team: Team;
 }

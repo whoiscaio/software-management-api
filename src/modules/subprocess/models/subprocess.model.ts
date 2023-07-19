@@ -18,7 +18,9 @@ export class Subprocess {
   @Column()
   description: string;
 
-  @ManyToOne(() => Process, (process) => process.subprocesses)
+  @ManyToOne(() => Process, (process) => process.subprocesses, {
+    onDelete: 'CASCADE',
+  })
   @JoinColumn({ name: 'process_id', referencedColumnName: 'id' })
   process: Process;
 }
