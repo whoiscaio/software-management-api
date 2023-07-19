@@ -1,9 +1,11 @@
+import { User } from 'src/modules/auth/models/user.model';
 import { Phase } from 'src/modules/phase/models/phase.model';
 import { Subprocess } from 'src/modules/subprocess/models/subprocess.model';
 import {
   Column,
   Entity,
   JoinColumn,
+  ManyToMany,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -16,6 +18,9 @@ export class Process {
 
   @Column()
   name: string;
+
+  @ManyToMany(() => User, (user) => user.processes)
+  users: User[];
 
   @ManyToOne(() => Phase, (phase) => phase.processes, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'phase_id', referencedColumnName: 'id' })

@@ -1,4 +1,5 @@
 import { Exclude } from 'class-transformer';
+import { Process } from 'src/modules/process/models/process.model';
 import { Team } from 'src/modules/team/models/team.model';
 import {
   Column,
@@ -35,4 +36,20 @@ export class User {
     },
   })
   teams: Team[];
+
+  @ManyToMany(() => Process, (process) => process.users, {
+    cascade: ['update', 'insert'],
+  })
+  @JoinTable({
+    name: 'user_process',
+    joinColumn: {
+      name: 'user_id',
+      referencedColumnName: 'id',
+    },
+    inverseJoinColumn: {
+      name: 'process_id',
+      referencedColumnName: 'id',
+    },
+  })
+  processes: Process[];
 }
