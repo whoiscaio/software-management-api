@@ -7,6 +7,7 @@ import { WorkspaceModule } from './modules/workspace/workspace.module';
 import { PhaseModule } from './modules/phase/phase.module';
 import { ProcessModule } from './modules/process/process.module';
 import { SubprocessModule } from './modules/subprocess/subprocess.module';
+import { MainModule } from './modules/main/main.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { SubprocessModule } from './modules/subprocess/subprocess.module';
     PhaseModule,
     ProcessModule,
     SubprocessModule,
+    MainModule,
   ],
 })
 export class AppModule {}
