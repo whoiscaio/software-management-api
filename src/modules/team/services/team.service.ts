@@ -14,7 +14,7 @@ export class TeamService {
     private readonly userRepository: Repository<User>,
   ) {}
 
-  private relations = ['users'];
+  private relations = ['users', 'workspaces'];
 
   async getAll() {
     const teams = await this.teamRepository.find();
