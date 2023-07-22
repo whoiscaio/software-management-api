@@ -52,8 +52,6 @@ export class TeamService {
 
     team.users = [...team.users, user];
 
-    console.log(team);
-
     await this.teamRepository.save(team);
   }
 
