@@ -14,7 +14,7 @@ export class WorkspaceService {
     private readonly teamRepository: Repository<Team>,
   ) {}
 
-  private relations = ['phases', 'team'];
+  private relations = ['phases', 'team', 'phases.processes'];
 
   async toEntity(workspaceDTO: WorkspaceDTO) {
     const team = await this.teamRepository.findOne({
