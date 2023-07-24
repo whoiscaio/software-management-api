@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { Workspace } from '../models/workspace.model';
 import { WorkspaceDTO } from '../dtos/workspace.dto';
 import { Team } from 'src/modules/team/models/team.model';
+import { Phase } from 'src/modules/phase/models/phase.model';
 
 @Injectable()
 export class WorkspaceService {
@@ -12,6 +13,8 @@ export class WorkspaceService {
     private readonly workspaceRepository: Repository<Workspace>,
     @InjectRepository(Team)
     private readonly teamRepository: Repository<Team>,
+    @InjectRepository(Phase)
+    private readonly phaseRepository: Repository<Phase>,
   ) {}
 
   private relations = ['phases', 'team', 'phases.processes'];
@@ -51,7 +54,21 @@ export class WorkspaceService {
   async create(workspace: WorkspaceDTO) {
     const newWorkspace = await this.toEntity(workspace);
 
+    const prototypePhase = new Phase(
+      'Prototipação',
+      'Fase de elaboração da feature',
+      newWorkspace,
+    );
+
+    const concludedPhase = new Phase(
+      'Concluídos',
+      'Processos concluídos',
+      newWorkspace,
+    );
+
     await this.workspaceRepository.save(newWorkspace);
+    await this.phaseRepository.save(prototypePhase);
+    await this.phaseRepository.save(concludedPhase);
   }
 
   async update(id: string, workspace: WorkspaceDTO) {

@@ -11,6 +11,12 @@ import {
 
 @Entity()
 export class Phase {
+  constructor(name: string, description: string, workspace: Workspace) {
+    this.name = name;
+    this.description = description;
+    this.workspace = workspace;
+  }
+
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
