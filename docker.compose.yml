@@ -1,0 +1,28 @@
+version: '3'
+services:
+  api:
+    build:
+      context: .
+      dockerfile: dockerfile
+    ports:
+      - '3001:3001'
+    depends_on:
+      - db
+    networks:
+      - manageapp-network
+  db:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: db_sw_process_management
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - manageapp-network
+networks:
+  manageapp-network:
+    driver: bridge
+volumes:
+  pgdata:
