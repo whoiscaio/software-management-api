@@ -1,9 +1,12 @@
+# build with 'docker compose -f docker-compose.yml up --build'
+
 version: '3'
 services:
   api:
+    container_name: manageapp-api
     build:
       context: .
-      dockerfile: dockerfile
+      dockerfile: Dockerfile
     ports:
       - '3001:3001'
     depends_on:
@@ -11,6 +14,7 @@ services:
     networks:
       - manageapp-network
   db:
+    container_name: manageapp-db
     image: postgres:latest
     restart: always
     environment:
@@ -25,4 +29,4 @@ networks:
   manageapp-network:
     driver: bridge
 volumes:
-  pgdata:
+  pgdata: 
