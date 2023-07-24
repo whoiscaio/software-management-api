@@ -7,10 +7,11 @@ import { SharedModule } from 'src/shared/shared.module';
 import { Team } from '../team/models/team.model';
 import { Process } from '../process/models/process.model';
 import { Phase } from '../phase/models/phase.model';
+import { Subprocess } from '../subprocess/models/subprocess.model';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Workspace, Team, Process, Phase]),
+    TypeOrmModule.forFeature([Workspace, Team, Process, Phase, Subprocess]),
     SharedModule,
   ],
   controllers: [WorkspaceController],
