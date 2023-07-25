@@ -19,6 +19,9 @@ export class Process {
   @Column()
   name: string;
 
+  @Column({ default: false })
+  concluded: boolean;
+
   @ManyToMany(() => User, (user) => user.processes)
   users: User[];
 

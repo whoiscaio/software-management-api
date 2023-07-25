@@ -15,6 +15,9 @@ export class Subprocess {
   @Column()
   name: string;
 
+  @Column({ default: false })
+  concluded: boolean;
+
   @Column()
   description: string;
 
