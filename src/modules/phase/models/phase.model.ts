@@ -22,6 +22,7 @@ export class Phase {
   id: string;
 
   @Generated('increment')
+  @Column()
   order: number;
 
   @Column()
