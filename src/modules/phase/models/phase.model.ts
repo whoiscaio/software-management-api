@@ -3,6 +3,7 @@ import { Workspace } from 'src/modules/workspace/models/workspace.model';
 import {
   Column,
   Entity,
+  Generated,
   JoinColumn,
   ManyToOne,
   OneToMany,
@@ -19,6 +20,9 @@ export class Phase {
 
   @PrimaryGeneratedColumn('uuid')
   id: string;
+
+  @Generated('increment')
+  order: number;
 
   @Column()
   name: string;
