@@ -31,10 +31,12 @@ export class TeamService {
     return team || null;
   }
 
-  async create(team: TeamDTO) {
+  async create(team: TeamDTO, userData: User) {
     const newTeam = this.teamRepository.create(team);
 
     const createdTeam = await this.teamRepository.save(newTeam);
+
+    await this.assignUserToTeam(createdTeam.id, userData.id);
 
     return createdTeam;
   }

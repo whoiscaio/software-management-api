@@ -1,5 +1,6 @@
 import {
   Body,
+  ClassSerializerInterceptor,
   Controller,
   Delete,
   Get,
@@ -8,16 +9,20 @@ import {
   ParseUUIDPipe,
   Post,
   Put,
+  Req,
   UseGuards,
+  UseInterceptors,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
 import { TeamService } from '../services/team.service';
 import { TeamDTO } from '../dtos/team.dto';
 import { JwtAuthGuard } from 'src/shared/guards/jwt.guard';
+import { CustomRequest } from 'src/shared/types/CustomRequest';
 
 @Controller('teams')
 @UseGuards(JwtAuthGuard)
+@UseInterceptors(ClassSerializerInterceptor)
 @UsePipes(ValidationPipe)
 export class TeamController {
   constructor(private readonly teamService: TeamService) {}
@@ -41,8 +46,8 @@ export class TeamController {
   }
 
   @Post()
-  async create(@Body() teamDTO: TeamDTO) {
-    const newTeam = await this.teamService.create(teamDTO);
+  async create(@Body() teamDTO: TeamDTO, @Req() request: CustomRequest) {
+    const newTeam = await this.teamService.create(teamDTO, request.user);
 
     return newTeam;
   }
