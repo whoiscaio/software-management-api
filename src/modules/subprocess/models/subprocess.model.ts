@@ -20,7 +20,7 @@ export class Subprocess {
   concluded: boolean;
 
   @Generated('increment')
-  @Column({ default: 0 })
+  @Column()
   order: number;
 
   @Column()

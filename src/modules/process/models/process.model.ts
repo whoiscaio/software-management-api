@@ -24,7 +24,7 @@ export class Process {
   concluded: boolean;
 
   @Generated('increment')
-  @Column({ default: 0 })
+  @Column()
   order: number;
 
   @ManyToMany(() => User, (user) => user.processes)
