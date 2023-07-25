@@ -3,7 +3,6 @@ import 'dotenv/config';
 
 import { AppModule } from './app.module';
 import { corsConfig } from './config/cors.config';
-import { ClassSerializerInterceptor } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
