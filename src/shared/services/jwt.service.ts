@@ -1,6 +1,7 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtSignOptions, JwtService as NestJwtService } from '@nestjs/jwt';
 import { jwtConstants } from 'src/config/jwt.config';
+import { User } from 'src/modules/auth/models/user.model';
 
 @Injectable()
 export class JwtService {
@@ -19,9 +20,9 @@ export class JwtService {
 
   verify(jwt: string) {
     try {
-      this.jwtService.verify(jwt);
+      const { user }: { user: User } = this.jwtService.verify(jwt);
 
-      return true;
+      return user;
     } catch (error) {
       throw new UnauthorizedException('Token inválido ou expirado.');
     }

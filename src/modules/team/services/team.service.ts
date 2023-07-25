@@ -34,7 +34,9 @@ export class TeamService {
   async create(team: TeamDTO) {
     const newTeam = this.teamRepository.create(team);
 
-    await this.teamRepository.save(newTeam);
+    const createdTeam = await this.teamRepository.save(newTeam);
+
+    return createdTeam;
   }
 
   async assignUserToTeam(teamId: string, userId: string) {

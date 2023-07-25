@@ -42,9 +42,9 @@ export class TeamController {
 
   @Post()
   async create(@Body() teamDTO: TeamDTO) {
-    await this.teamService.create(teamDTO);
+    const newTeam = await this.teamService.create(teamDTO);
 
-    return;
+    return newTeam;
   }
 
   @Post(':teamId/users/:userId')
