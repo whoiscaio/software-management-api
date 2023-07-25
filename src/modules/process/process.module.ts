@@ -11,5 +11,6 @@ import { User } from '../auth/models/user.model';
   imports: [TypeOrmModule.forFeature([Process, Phase, User]), SharedModule],
   controllers: [ProcessController],
   providers: [ProcessService],
+  exports: [ProcessService],
 })
 export class ProcessModule {}

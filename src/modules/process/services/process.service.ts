@@ -90,6 +90,17 @@ export class ProcessService {
     return updatedProcess;
   }
 
+  async shouldConclude(process: Process) {
+    const areAllSubprocessesConcluded = process.subprocesses.every(
+      (subprocess) => subprocess.concluded,
+    );
+
+    console.log(areAllSubprocessesConcluded);
+
+    process.concluded = areAllSubprocessesConcluded;
+    await this.processRepository.save(process);
+  }
+
   async delete(id: string) {
     await this.processRepository.delete(id);
   }

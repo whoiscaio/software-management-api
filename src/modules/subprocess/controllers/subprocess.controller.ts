@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  Inject,
   NotFoundException,
   Param,
   ParseUUIDPipe,
@@ -15,12 +16,16 @@ import {
 import { JwtAuthGuard } from 'src/shared/guards/jwt.guard';
 import { SubprocessService } from '../services/subprocess.service';
 import { SubprocessDTO } from '../dtos/subprocess.dto';
+import { ProcessService } from 'src/modules/process/services/process.service';
 
 @Controller('subprocesses')
 @UseGuards(JwtAuthGuard)
 @UsePipes(ValidationPipe)
 export class SubprocessController {
-  constructor(private readonly subprocessService: SubprocessService) {}
+  constructor(
+    private readonly subprocessService: SubprocessService,
+    private readonly processService: ProcessService,
+  ) {}
 
   @Get()
   async findAll() {
@@ -44,6 +49,13 @@ export class SubprocessController {
   async create(@Body() subprocessDTO: SubprocessDTO) {
     await this.subprocessService.create(subprocessDTO);
 
+    const associatedProcess = await this.processService.getOne(
+      subprocessDTO.process_id,
+      true,
+    );
+
+    await this.processService.shouldConclude(associatedProcess);
+
     return;
   }
 
@@ -62,6 +74,13 @@ export class SubprocessController {
       id,
       subprocessDTO,
     );
+
+    const associatedProcess = await this.processService.getOne(
+      subprocessDTO.process_id,
+      true,
+    );
+
+    await this.processService.shouldConclude(associatedProcess);
 
     return updatedSubprocess;
   }
