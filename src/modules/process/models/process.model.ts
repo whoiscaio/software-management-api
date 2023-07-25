@@ -4,6 +4,7 @@ import { Subprocess } from 'src/modules/subprocess/models/subprocess.model';
 import {
   Column,
   Entity,
+  Generated,
   JoinColumn,
   ManyToMany,
   ManyToOne,
@@ -21,6 +22,10 @@ export class Process {
 
   @Column({ default: false })
   concluded: boolean;
+
+  @Generated('increment')
+  @Column({ default: 0 })
+  order: number;
 
   @ManyToMany(() => User, (user) => user.processes)
   users: User[];
