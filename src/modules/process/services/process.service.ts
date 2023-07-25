@@ -76,12 +76,20 @@ export class ProcessService {
   }
 
   async update(id: string, process: ProcessDTO) {
-    const existingProcess = await this.getOne(id);
+    const existingProcess = await this.getOne(id, true);
 
     const updatedProcessModel = await this.toEntity({
       ...existingProcess,
       ...process,
     });
+
+    console.log(updatedProcessModel);
+
+    if (updatedProcessModel.concluded) {
+      updatedProcessModel.subprocesses.map((subprocess) => {
+        subprocess.concluded = true;
+      });
+    }
 
     const updatedProcess = await this.processRepository.save(
       updatedProcessModel,
