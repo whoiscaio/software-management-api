@@ -4,7 +4,6 @@ export class WorkspaceDTO {
   @IsNotEmpty()
   name: string;
 
-  @IsNotEmpty()
   description: string;
 
   @IsUUID()

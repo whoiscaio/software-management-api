@@ -71,9 +71,11 @@ export class WorkspaceService {
       newWorkspace,
     );
 
-    await this.workspaceRepository.save(newWorkspace);
+    const createdWorkspace = await this.workspaceRepository.save(newWorkspace);
     await this.phaseRepository.save(prototypePhase);
     await this.phaseRepository.save(concludedPhase);
+
+    return createdWorkspace;
   }
 
   async update(id: string, workspace: WorkspaceDTO) {

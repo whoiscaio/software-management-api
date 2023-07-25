@@ -44,9 +44,9 @@ export class WorkspaceController {
 
   @Post()
   async create(@Body() workspaceDTO: WorkspaceDTO) {
-    await this.workspaceService.create(workspaceDTO);
+    const newWorkspace = await this.workspaceService.create(workspaceDTO);
 
-    return;
+    return newWorkspace;
   }
 
   @Put(':id')
