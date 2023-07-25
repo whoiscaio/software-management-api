@@ -2,6 +2,7 @@ import { Process } from 'src/modules/process/models/process.model';
 import {
   Column,
   Entity,
+  Generated,
   JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
@@ -17,6 +18,10 @@ export class Subprocess {
 
   @Column({ default: false })
   concluded: boolean;
+
+  @Generated('increment')
+  @Column({ default: 0 })
+  order: number;
 
   @Column()
   description: string;
